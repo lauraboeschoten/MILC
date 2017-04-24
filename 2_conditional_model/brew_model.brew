@@ -1,0 +1,49 @@
+  //LG5.0//
+ version = 5.0  
+
+ infile 'samples/bootstrap_sample_<%=i%>.txt' 
+ model  
+title 'latent class multiple imputation';
+
+options
+   maxthreads=all;
+   algorithm 
+      tolerance=1e-008 emtolerance=0.01 emiterations=250 nriterations=500;
+   startvalues
+      seed=0 sets=16 tolerance=1e-005 iterations=50;
+   bayes
+      categorical=1 variances=1 latent=1 poisson=1;
+   montecarlo
+      seed=0 sets=0 replicates=500 tolerance=1e-008;
+   quadrature  nodes=10;
+   missing  excludeall;
+   output      
+      parameters=effect profile probmeans=posterior estimatedvalues=model;
+   outfile  'D:\Surfdrive\Project 1\datapackage\2_conditional_model\LC<%=j%>.txt' classification;
+variables
+   dependent gender1 nominal, gender2 nominal, gender3 nominal;
+   independent sport nominal, pregnant nominal;
+   caseweight <%=bootstrap.colnames%>;
+   latent
+      Cluster nominal 2;
+equations
+   gender1 <- 1 | Cluster;
+   gender2 <- 1 | Cluster;
+   gender3 <- 1 | Cluster;
+ Cluster <- 1 + sport + pregnant;
+   {
+<%=cp.min%> <%=cp.plus%>
+<%=cp.min%> <%=cp.plus%>
+<%=cp.min%> <%=cp.plus%>
+0 <%=co.coef%>
+<%=imp.comp%>}
+end model
+
+
+
+
+
+
+
+
+
