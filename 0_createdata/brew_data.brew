@@ -1,0 +1,45 @@
+//LG5.0//
+version = 5.0
+infile '<%=in.file%>' quote = single
+
+
+model
+title Model3;
+options
+maxthreads=all;
+algorithm
+tolerance=1e-008 emtolerance=0.01 emiterations=250 nriterations=50;
+startvalues
+seed=0 sets=16 tolerance=1e-005 iterations=50;
+bayes
+categorical=0 variances=0 latent=0 poisson=0;
+montecarlo
+seed=0 sets=0 replicates=500 tolerance=1e-008;
+quadrature  nodes=10;
+missing  excludeall;
+output
+outfile '<%=out.file%>'
+simulation=<%=nsim%>
+parameters=first betaopts=wl standarderrors=robust profile probmeans=posterior
+frequencies bivariateresiduals classification classification=model estimatedvalues=model;
+variables
+caseweight freq;
+dependent gender1 2 nominal, gender2 2 nominal, gender3 2 nominal, sport 2 nominal, pregnant 2 nominal;
+latent
+Cluster 2 nominal, latentpregnant 2 nominal;
+equations
+gender1 <- 1 | Cluster;
+gender2 <- 1 | Cluster;
+gender3 <- 1 | Cluster;
+sport <- 1 + Cluster;
+pregnant <- (a~wei)latentpregnant;
+latentpregnant <- 1 + (w~wei)Cluster;
+a={1 0 0 1};
+w={1 0 1 1};
+{
+<%=cp.min%> <%=cp.plus%>
+<%=cp.min%> <%=cp.plus%>
+<%=cp.min%> <%=cp.plus%>
+0 <%=co.coef%>
+<%=imp.comp%>}
+end model
