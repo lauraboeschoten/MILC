@@ -39,11 +39,11 @@ U2hat3 <- summary(gl3)$coefficients[2,2]
 U2hat4 <- summary(gl4)$coefficients[2,2]
 U2hat5 <- summary(gl5)$coefficients[2,2]
 
-Qbar1 <- mean(Q1hat1, Q1hat2, Q1hat3, Q1hat4, Q1hat5)
-Qbar2 <- mean(Q2hat1, Q2hat2, Q2hat3, Q2hat4, Q2hat5)
+Qbar1 <- mean(c(Q1hat1, Q1hat2, Q1hat3, Q1hat4, Q1hat5))
+Qbar2 <- mean(c(Q2hat1, Q2hat2, Q2hat3, Q2hat4, Q2hat5))
 
-Ubar1 <- (mean(U1hat1, U1hat2, U1hat3, U1hat4, U1hat5))^2
-Ubar2 <- (mean(U2hat1, U2hat2, U2hat3, U2hat4, U2hat5))^2
+Ubar1 <- (mean(c(U1hat1, U1hat2, U1hat3, U1hat4, U1hat5)))^2
+Ubar2 <- (mean(c(U2hat1, U2hat2, U2hat3, U2hat4, U2hat5)))^2
 
 Uhat1 <- c(U1hat1, U1hat2, U1hat3, U1hat4, U1hat5)
 Uhat2 <- c(U2hat1, U2hat2, U2hat3, U2hat4, U2hat5)
