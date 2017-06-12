@@ -1,4 +1,5 @@
 setwd("D:\\Surfdrive\\Project 1\\datapackage\\5_application\\2_conditional_model")
+set.seed(123)
 
 lc1 <- read.table("LC1.txt", comment.char="", header=TRUE)
 lc2 <- read.table("LC2.txt", comment.char="", header=TRUE)
